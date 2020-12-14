@@ -15,10 +15,13 @@ class ExplorerController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.backgroundColor = .systemTeal
+        self.configureUI()
     }
     
     
     // MARK: - Helpers
+    private func configureUI() {
+        self.view.backgroundColor = .systemBackground
+        self.navigationItem.title = "Explorer"
+    }
 }
