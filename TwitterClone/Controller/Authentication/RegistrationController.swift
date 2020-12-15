@@ -117,7 +117,7 @@ class RegistrationController: UIViewController {
     
     private func addPlusPhotoButtonUI() {
         self.view.addSubview(self.btPlusPhoto)
-        self.btPlusPhoto.anchor(top: self.view.safeAreaLayoutGuide.topAnchor, paddingTop: 16, width: 140, height: 140)
+        self.btPlusPhoto.anchor(top: self.view.safeAreaLayoutGuide.topAnchor, paddingTop: 16, width: 128, height: 128)
         self.btPlusPhoto.centerX(inView: self.view)
     }
     
@@ -145,13 +145,14 @@ class RegistrationController: UIViewController {
     private func configurePhotoBottomUI(image: UIImage) {
         self.btPlusPhoto.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
         self.btPlusPhoto.layer.cornerRadius = self.btPlusPhoto.frame.width/2
+        self.btPlusPhoto.imageView?.contentMode = .scaleAspectFill
         self.btPlusPhoto.clipsToBounds = true
-        self.btPlusPhoto.layer.borderColor = UIColor.black.cgColor
+        self.btPlusPhoto.layer.borderColor = UIColor.white.cgColor
         self.btPlusPhoto.layer.borderWidth = 2
     }
 }
 
-
+// MARK:- Extension UIImagePickerControllerDelegate, UINavigationControllerDelegate
 extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
