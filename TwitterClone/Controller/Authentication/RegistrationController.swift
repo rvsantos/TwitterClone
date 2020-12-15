@@ -61,13 +61,7 @@ class RegistrationController: UIViewController {
     }()
     
     private let btSignUp: UIButton = {
-        let bt = UIButton(type: .system)
-        bt.backgroundColor = .white
-        bt.setTitle("Sign Up", for: .normal)
-        bt.setTitleColor(.twitterBlue, for: .normal)
-        bt.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-        bt.layer.cornerRadius = 5
-        bt.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        let bt = Utilities.actionButton(title: "Sign Up")
         bt.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
         return bt
     }()

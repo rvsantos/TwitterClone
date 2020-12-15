@@ -41,13 +41,7 @@ class LoginController: UIViewController {
     }()
     
     private let btSignIn: UIButton = {
-        let bt = UIButton(type: .system)
-        bt.backgroundColor = .white
-        bt.setTitle("Sign In", for: .normal)
-        bt.setTitleColor(.twitterBlue, for: .normal)
-        bt.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-        bt.layer.cornerRadius = 5
-        bt.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        let bt = Utilities.actionButton(title: "Sign In")
         bt.addTarget(self, action: #selector(handleSignIn), for: .touchUpInside)
         return bt
     }()

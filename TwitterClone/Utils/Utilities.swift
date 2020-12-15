@@ -10,7 +10,6 @@ import UIKit
 class Utilities {
     
     static func inputContainerView(withImage image: UIImage, textfield: UITextField) -> UIView {
-        
         let view = UIView()
         let iv = UIImageView()
         view.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -32,6 +31,7 @@ class Utilities {
         return view
     }
     
+    
     static func textField(withPlaceholder placeholder: String) -> UITextField {
         let tf = UITextField()
         tf.textColor = .white
@@ -39,6 +39,7 @@ class Utilities {
         tf.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         return tf
     }
+    
     
     static func attributedButton(_ firstPart: String, _ secondPart: String) -> UIButton {
         let bt = UIButton(type: .system)
@@ -49,6 +50,18 @@ class Utilities {
         
         bt.setAttributedTitle(attributedTitle, for: .normal)
         
+        return bt
+    }
+    
+    
+    static func actionButton(title: String) -> UIButton {
+        let bt = UIButton(type: .system)
+        bt.backgroundColor = .white
+        bt.setTitle(title, for: .normal)
+        bt.setTitleColor(.twitterBlue, for: .normal)
+        bt.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        bt.layer.cornerRadius = 5
+        bt.heightAnchor.constraint(equalToConstant: 50).isActive = true
         return bt
     }
 }
