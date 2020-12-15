@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import Firebase
 
 class RegistrationController: UIViewController {
     
     // MARK: - Properties
+    private var profileImage: UIImage?
+    
     private let btPlusPhoto: UIButton = {
         let bt = UIButton(type: .system)
         bt.setImage(#imageLiteral(resourceName: "plus_photo"), for: .normal)
@@ -81,7 +84,43 @@ class RegistrationController: UIViewController {
     
     // MARK: - Selectors
     @objc private func handleSignUp() {
-        print("Handle sign up...")
+        guard let profileImage = self.profileImage else {
+            print("DEBUG: Please select a profile image..")
+            return
+        }
+        
+        guard let email = self.tfEmail.text else { return }
+        guard let password = self.tfPassword.text else { return }
+        guard let fullname = self.tfFullname.text else { return }
+        guard let username = self.tfUsername.text else { return }
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            if let error = error {
+                fatalError("Error is \(error.localizedDescription)")
+            }
+            
+            guard let imageData = profileImage.jpegData(compressionQuality: 0.3) else { return }
+            let filename = NSUUID().uuidString
+            let storageRef = STORAGE_PROFILE_IMAGES.child(filename)
+            
+            storageRef.putData(imageData, metadata: nil) { (metadata, error) in
+                storageRef.downloadURL { (url, error) in
+                    guard let profileImageUrl = url?.absoluteString else { return }
+                    
+                    let values = [
+                        "email": email,
+                        "fullname": fullname,
+                        "username": username,
+                        "profileImageUrl": profileImageUrl
+                    ]
+                    
+                    guard let uid = result?.user.uid else { return }
+                    REF_USERS.child(uid).updateChildValues(values) { (error, ref) in
+                        print("DEBUG: Successfully updated user information...")
+                    }
+                }
+            }
+        }
     }
     
     
@@ -158,6 +197,7 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else { return }
         
+        self.profileImage = image
         self.configurePhotoBottomUI(image: image)
         
         self.dismiss(animated: true, completion: nil)
