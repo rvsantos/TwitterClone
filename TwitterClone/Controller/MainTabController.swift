@@ -42,7 +42,10 @@ class MainTabController: UITabBarController {
     
     // MARK: - Selectors
     @objc private func actionButtonTapped() {
-        print("Action button tapped...")
+        guard let user = self.user else { return }
+        let nav = UINavigationController(rootViewController: UploadTweetController(user: user))
+        nav.modalPresentationStyle = .fullScreen
+        self.present(nav, animated: true, completion: nil)
     }
     
     
@@ -89,7 +92,6 @@ class MainTabController: UITabBarController {
     
     
     private func configureViewControllers() {
-    
         let feed = self.templateNavigationController(viewController: FeedController(), image: #imageLiteral(resourceName: "home_unselected"))
         let explorer = self.templateNavigationController(viewController: ExplorerController(), image: #imageLiteral(resourceName: "search_unselected"))
         let notifications = self.templateNavigationController(viewController: NotificationsController(), image: #imageLiteral(resourceName: "like_unselected"))
