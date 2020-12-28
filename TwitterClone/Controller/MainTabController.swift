@@ -86,7 +86,8 @@ class MainTabController: UITabBarController {
         self.configureViewControllers()
         
         self.view.addSubview(self.actionButton)
-        self.actionButton.anchor(bottom: self.view.safeAreaLayoutGuide.bottomAnchor, right: self.view.rightAnchor, paddingBottom: 64, paddingRight: 16, width: 56, height: 56)
+        self.actionButton.anchor(bottom: self.view.safeAreaLayoutGuide.bottomAnchor, right: self.view.rightAnchor,
+                                 paddingBottom: 64, paddingRight: 16, width: 56, height: 56)
         self.actionButton.layer.cornerRadius = 56/2
     }
     

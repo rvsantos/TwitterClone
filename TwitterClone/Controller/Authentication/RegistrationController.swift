@@ -152,13 +152,15 @@ class RegistrationController: UIViewController {
         stack.distribution = .fillEqually
         
         self.view.addSubview(stack)
-        stack.anchor(top: self.btPlusPhoto.bottomAnchor, left: self.view.leftAnchor, right: self.view.rightAnchor, paddingTop: 20, paddingLeft: 32, paddingRight: 32)
+        stack.anchor(top: self.btPlusPhoto.bottomAnchor, left: self.view.leftAnchor, right: self.view.rightAnchor,
+                     paddingTop: 20, paddingLeft: 32, paddingRight: 32)
     }
     
     
     private func addBottomButtonUI() {
         self.view.addSubview(self.btAlreadyHaveAccount)
-        self.btAlreadyHaveAccount.anchor(left: self.view.leftAnchor, bottom: self.view.safeAreaLayoutGuide.bottomAnchor, right: self.view.rightAnchor, height: 20)
+        self.btAlreadyHaveAccount.anchor(left: self.view.leftAnchor, bottom: self.view.safeAreaLayoutGuide.bottomAnchor,
+                                         right: self.view.rightAnchor, height: 20)
         self.btAlreadyHaveAccount.centerX(inView: self.view)
     }
     
