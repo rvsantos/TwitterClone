@@ -93,12 +93,13 @@ class MainTabController: UITabBarController {
     
     
     private func configureViewControllers() {
-        let feed = self.templateNavigationController(viewController: FeedController(), image: #imageLiteral(resourceName: "home_unselected"))
+        let feed = FeedController(collectionViewLayout: UICollectionViewFlowLayout())
+        let navFeed = self.templateNavigationController(viewController: feed, image: #imageLiteral(resourceName: "home_unselected"))
         let explorer = self.templateNavigationController(viewController: ExplorerController(), image: #imageLiteral(resourceName: "search_unselected"))
         let notifications = self.templateNavigationController(viewController: NotificationsController(), image: #imageLiteral(resourceName: "like_unselected"))
         let conversations = self.templateNavigationController(viewController: ConversationsController(), image: #imageLiteral(resourceName: "mail"))
         
-        self.viewControllers = [feed, explorer, notifications, conversations]
+        self.viewControllers = [navFeed, explorer, notifications, conversations]
     }
     
     

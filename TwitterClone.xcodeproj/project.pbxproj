@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E03F378259AA14A00DFD5D1 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E03F377259AA14A00DFD5D1 /* TweetCell.swift */; };
 		1E15E6B22587CA2E003F88C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E15E6B12587CA2E003F88C4 /* AppDelegate.swift */; };
 		1E15E6B42587CA2E003F88C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E15E6B32587CA2E003F88C4 /* SceneDelegate.swift */; };
 		1E15E6BB2587CA31003F88C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E15E6BA2587CA31003F88C4 /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E03F377259AA14A00DFD5D1 /* TweetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 		1E15E6AE2587CA2E003F88C4 /* TwitterClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E15E6B12587CA2E003F88C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E15E6B32587CA2E003F88C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				1E26CBBA259430060017D976 /* CustomTextView.swift */,
+				1E03F377259AA14A00DFD5D1 /* TweetCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				1E15E6B22587CA2E003F88C4 /* AppDelegate.swift in Sources */,
 				1E15E6E025880614003F88C4 /* Extensions.swift in Sources */,
 				1E15E6E425883657003F88C4 /* LoginController.swift in Sources */,
+				1E03F378259AA14A00DFD5D1 /* TweetCell.swift in Sources */,
 				1E1884AF2589400E0069297B /* AuthService.swift in Sources */,
 				1E7184692591477700B3976F /* UploadTweetController.swift in Sources */,
 				1E26CBBB259430060017D976 /* CustomTextView.swift in Sources */,
