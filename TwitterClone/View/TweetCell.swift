@@ -32,11 +32,7 @@ class TweetCell: UICollectionViewCell {
         return lb
     }()
     
-    private let infoLabel: UILabel = {
-        let lb = UILabel()
-        lb.font = .systemFont(ofSize: 14)
-        return lb
-    }()
+    private let infoLabel = UILabel()
     
     private lazy var commentButton: UIButton = {
         let bt = UIButton(type: .system)
@@ -111,9 +107,12 @@ class TweetCell: UICollectionViewCell {
     // MARK: - Helpers
     private func configure() {
         guard let tweet = self.tweet else { return }
-        self.profileImageView.sd_setImage(with: tweet.user.profileImageUrl, completed: nil)
-        self.captionLabel.text = tweet.caption
-        self.infoLabel.text = "\(tweet.user.fullname) @\(tweet.user.username)"
+        
+        let viewModel = TweetViewModel(tweet: tweet)
+        
+        self.profileImageView.sd_setImage(with: viewModel.profileImageUrl)
+        self.captionLabel.text = viewModel.captionLabel
+        self.infoLabel.attributedText = viewModel.userInfoText
     }
     
     

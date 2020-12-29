@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1E03F378259AA14A00DFD5D1 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E03F377259AA14A00DFD5D1 /* TweetCell.swift */; };
+		1E03F38A259ADF9A00DFD5D1 /* TweetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E03F389259ADF9A00DFD5D1 /* TweetViewModel.swift */; };
 		1E15E6B22587CA2E003F88C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E15E6B12587CA2E003F88C4 /* AppDelegate.swift */; };
 		1E15E6B42587CA2E003F88C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E15E6B32587CA2E003F88C4 /* SceneDelegate.swift */; };
 		1E15E6BB2587CA31003F88C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E15E6BA2587CA31003F88C4 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		1E03F377259AA14A00DFD5D1 /* TweetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
+		1E03F389259ADF9A00DFD5D1 /* TweetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetViewModel.swift; sourceTree = "<group>"; };
 		1E15E6AE2587CA2E003F88C4 /* TwitterClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E15E6B12587CA2E003F88C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E15E6B32587CA2E003F88C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 		1E15E6CB25880250003F88C4 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				1E03F389259ADF9A00DFD5D1 /* TweetViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 				1E15E6D0258802FA003F88C4 /* MainTabController.swift in Sources */,
 				1E15E6D725880432003F88C4 /* ExplorerController.swift in Sources */,
 				1E15E6B42587CA2E003F88C4 /* SceneDelegate.swift in Sources */,
+				1E03F38A259ADF9A00DFD5D1 /* TweetViewModel.swift in Sources */,
 				1E15E6E725883719003F88C4 /* RegistrationController.swift in Sources */,
 				1E15E6D425880422003F88C4 /* FeedController.swift in Sources */,
 				1E1884AC258929790069297B /* Constants.swift in Sources */,

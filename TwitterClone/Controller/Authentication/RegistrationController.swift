@@ -92,7 +92,7 @@ class RegistrationController: UIViewController {
         guard let email = self.tfEmail.text else { return }
         guard let password = self.tfPassword.text else { return }
         guard let fullname = self.tfFullname.text else { return }
-        guard let username = self.tfUsername.text else { return }
+        guard let username = self.tfUsername.text?.lowercased() else { return }
         
         let credentials = AuthCredentials(email: email, password: password, fullname: fullname, username: username, profileImage: profileImage)
         
