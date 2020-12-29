@@ -10,6 +10,10 @@ import UIKit
 class TweetCell: UICollectionViewCell {
     
     // MARK: - Properties
+    var tweet: Tweet? {
+        didSet{ self.configure() }
+    }
+    
     private let profileImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
@@ -28,7 +32,11 @@ class TweetCell: UICollectionViewCell {
         return lb
     }()
     
-    private let infoLabel = UILabel()
+    private let infoLabel: UILabel = {
+        let lb = UILabel()
+        lb.font = .systemFont(ofSize: 14)
+        return lb
+    }()
     
     private lazy var commentButton: UIButton = {
         let bt = UIButton(type: .system)
@@ -100,6 +108,14 @@ class TweetCell: UICollectionViewCell {
     }
     
     
+    // MARK: - Helpers
+    private func configure() {
+        guard let tweet = self.tweet else { return }
+        self.profileImageView.sd_setImage(with: tweet.user.profileImageUrl, completed: nil)
+        self.captionLabel.text = tweet.caption
+        self.infoLabel.text = "\(tweet.user.fullname) @\(tweet.user.username)"
+    }
+    
     
     // MARK: - Private
     private func configureUI() {
@@ -125,9 +141,6 @@ class TweetCell: UICollectionViewCell {
         addSubview(stack)
         stack.anchor(top: self.profileImageView.topAnchor, left: self.profileImageView.rightAnchor, right: rightAnchor,
                      paddingLeft: 12, paddingRight: 12)
-        
-        self.infoLabel.font = UIFont.systemFont(ofSize: 14)
-        self.infoLabel.text = "Mr Dolemite @dolemite"
         
         let actionStack = UIStackView(arrangedSubviews: [self.commentButton, self.retweetButton, self.likeButton, self.shareButton])
         actionStack.axis = .horizontal

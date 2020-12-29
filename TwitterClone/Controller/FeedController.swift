@@ -17,6 +17,10 @@ class FeedController: UICollectionViewController {
         didSet { self.configureProfileImageViewBarItem() }
     }
     
+    private var tweets = [Tweet]() {
+        didSet { self.collectionView.reloadData() }
+    }
+    
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -29,8 +33,9 @@ class FeedController: UICollectionViewController {
     
     // MARK: - API
     private func fetchTweets() {
-        TweetService.shared.fetchTweets { (tweets) in
-            print("DEBUG: tweets are \(tweets)")
+        TweetService.shared.fetchTweets { [weak self] (tweets) in
+            guard let self = self else { return }
+            self.tweets = tweets
         }
     }
     
@@ -73,12 +78,14 @@ class FeedController: UICollectionViewController {
 extension FeedController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return self.tweets.count
     }
     
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableID, for: indexPath) as! TweetCell
+        
+        cell.tweet = self.tweets[indexPath.row]
         
         return cell
     }
