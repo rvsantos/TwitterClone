@@ -13,19 +13,46 @@ private let headerID = "ProfileHeader"
 class ProfileController: UICollectionViewController {
     
     // MARK: - Properties
+    private let user: User
+    
+    
+    private var tweets = [Tweet]() {
+        didSet { self.collectionView.reloadData() }
+    }
     
     
     // MARK: - Lifecycle
+    init(user: User) {
+        self.user = user
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
+    }
+    
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.configureCollectionView()
+        self.fetchTweets()
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.barStyle = .black
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.barStyle = .default
         self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    
+    // MARK: - API
+    private func fetchTweets() {
+        TweetService.shared.fetchTweets(forUser: self.user) { (tweets) in
+            self.tweets = tweets
+        }
     }
     
     
@@ -44,12 +71,13 @@ class ProfileController: UICollectionViewController {
 // MARK: - UICollectionViewDataSource
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return self.tweets.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseID, for: indexPath) as! TweetCell
-        
+        cell.delegate = self
+        cell.tweet = self.tweets[indexPath.row]
         return cell
     }
 }
@@ -61,7 +89,7 @@ extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as! ProfileHeader
         
-        header.delegate = self
+        header.configure(with: self.user, delegate: self)
         
         return header
     }
@@ -91,4 +119,11 @@ extension ProfileController: ProfileHeaderDelegate {
     func handleDismissal() {
         self.navigationController?.popViewController(animated: true)
     }
+}
+
+
+// MARK: - TWeetCellDelegate
+extension ProfileController: TWeetCellDelegate {
+    
+    func handleProfileImageTapped(_ cell: TweetCell) {}
 }

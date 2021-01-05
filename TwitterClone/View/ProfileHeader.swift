@@ -61,7 +61,6 @@ class ProfileHeader: UICollectionReusableView {
     private let fullnameLabel: UILabel = {
         let lb = UILabel()
         lb.font = .boldSystemFont(ofSize: 20)
-        lb.text = "Eddie Brock"
         return lb
     }()
     
@@ -69,7 +68,6 @@ class ProfileHeader: UICollectionReusableView {
         let lb = UILabel()
         lb.font = .systemFont(ofSize: 16)
         lb.textColor = .lightGray
-        lb.text = "@venom"
         return lb
     }()
     
@@ -85,6 +83,26 @@ class ProfileHeader: UICollectionReusableView {
         let view = UIView()
         view.backgroundColor = .twitterBlue
         return view
+    }()
+    
+    private let followingLabel: UILabel = {
+        let lb = UILabel()
+        
+        let followTap = UITapGestureRecognizer(target: self, action: #selector(handleFollowingTapped))
+        lb.isUserInteractionEnabled = true
+        lb.addGestureRecognizer(followTap)
+        
+        return lb
+    }()
+    
+    private let followersLabel: UILabel = {
+        let lb = UILabel()
+        
+        let followTap = UITapGestureRecognizer(target: self, action: #selector(handleFollowersTapped))
+        lb.isUserInteractionEnabled = true
+        lb.addGestureRecognizer(followTap)
+        
+        return lb
     }()
     
     // MARK: - Lifecycle
@@ -110,8 +128,35 @@ class ProfileHeader: UICollectionReusableView {
         print("DEBUG: Call handleEditProfileFollow...")
         self.delegate?.handleEditProfileFollow()
     }
+    
+    
+    @objc private func handleFollowingTapped() {
+        
+    }
+    
+    
+    @objc private func handleFollowersTapped() {
+        
+    }
 
     
+    // MARK: - Helpers
+    func configure(with user: User, delegate: ProfileHeaderDelegate) {
+        self.delegate = delegate
+        
+        let viewModel = ProfileHeaderViewModel(user: user)
+        
+        self.profileImageView.sd_setImage(with: user.profileImageUrl)
+        
+        self.editProfileFollowButton.setTitle(viewModel.actionButtonTitle, for: .normal)
+        self.followingLabel.attributedText = viewModel.followingString
+        self.followersLabel.attributedText = viewModel.followersString
+        
+        self.fullnameLabel.text = user.fullname
+        self.usernameLabel.text = viewModel.usernameText
+    }
+    
+        
     // MARK: - Privatee
     private func configureUI() {
         self.filterBar.delegate = self
@@ -154,6 +199,15 @@ class ProfileHeader: UICollectionReusableView {
         self.addSubview(stack)
         stack.anchor(top: self.profileImageView.bottomAnchor, left: leftAnchor, right: rightAnchor,
                      paddingTop: 8, paddingLeft: 12, paddingRight: 12)
+        
+        let followStack = UIStackView(arrangedSubviews: [self.followingLabel, self.followersLabel])
+        followStack.axis = .horizontal
+        followStack.spacing = 8
+        followStack.distribution = .fillEqually
+        
+        self.addSubview(followStack)
+        followStack.anchor(top: stack.bottomAnchor, left: leftAnchor,
+                           paddingTop: 8, paddingLeft: 12)
     }
     
     
@@ -165,11 +219,10 @@ class ProfileHeader: UICollectionReusableView {
     
     private func configureUnderlineView() {
         self.addSubview(self.underlineView)
-        self.underlineView.anchor(left: leftAnchor, bottom: bottomAnchor, width: frame.width/3, height: 2)
+        let count = CGFloat(ProfileFilterOptions.allCases.count)
+        self.underlineView.anchor(left: leftAnchor, bottom: bottomAnchor, width: frame.width/count, height: 2)
     }
     
-    
-    // MARK: - Helpers
 }
 
 
