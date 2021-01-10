@@ -96,8 +96,9 @@ extension ProfileController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseID, for: indexPath) as! TweetCell
-        cell.delegate = self
-        cell.tweet = self.tweets[indexPath.row]
+        
+        cell.configure(tweet: self.tweets[indexPath.row], delegate: self)
+        
         return cell
     }
 }
@@ -162,6 +163,8 @@ extension ProfileController: ProfileHeaderDelegate {
 
 // MARK: - TWeetCellDelegate
 extension ProfileController: TWeetCellDelegate {
+    func handleProfileImageTapped(_ user: User) {}
     
-    func handleProfileImageTapped(_ cell: TweetCell) {}
+    
+//    func handleProfileImageTapped(_ cell: TweetCell) {}
 }

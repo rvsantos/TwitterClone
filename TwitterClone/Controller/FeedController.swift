@@ -92,10 +92,15 @@ extension FeedController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableID, for: indexPath) as! TweetCell
         
-        cell.delegate = self
-        cell.tweet = self.tweets[indexPath.row]
+        cell.configure(tweet: self.tweets[indexPath.row], delegate: self)
         
         return cell
+    }
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let controller = TweetController(tweet: self.tweets[indexPath.row])
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 }
 
@@ -111,9 +116,14 @@ extension FeedController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - Extension TweetCellDelegate
 extension FeedController: TWeetCellDelegate {
-    func handleProfileImageTapped(_ cell: TweetCell) {
-        guard let user = cell.tweet?.user else { return }
+    func handleProfileImageTapped(_ user: User) {
         let profileController = ProfileController(user: user)
         self.navigationController?.pushViewController(profileController, animated: true)
     }
+    
+//    func handleProfileImageTapped(_ cell: TweetCell) {
+//        guard let user = cell.tweet?.user else { return }
+//        let profileController = ProfileController(user: user)
+//        self.navigationController?.pushViewController(profileController, animated: true)
+//    }
 }

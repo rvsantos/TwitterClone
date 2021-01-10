@@ -8,7 +8,7 @@
 import UIKit
 
 protocol TWeetCellDelegate: class {
-    func handleProfileImageTapped(_ cell: TweetCell)
+    func handleProfileImageTapped(_ user: User)
 }
 
 class TweetCell: UICollectionViewCell {
@@ -16,9 +16,7 @@ class TweetCell: UICollectionViewCell {
     // MARK: - Properties
     weak var delegate: TWeetCellDelegate?
     
-    var tweet: Tweet? {
-        didSet{ self.configure() }
-    }
+    private var tweet: Tweet?
     
     private lazy var profileImageView: UIImageView = {
         let iv = UIImageView()
@@ -76,7 +74,7 @@ class TweetCell: UICollectionViewCell {
         bt.setImage(UIImage(named: "share"), for: .normal)
         bt.tintColor = .darkGray
         bt.setDimensions(width: 20, height: 20)
-        bt.addTarget(self, action: #selector(handleShareTapped), for: .touchUpInside)
+        bt.addTarget(self, action: #selector(handleSharedTapped), for: .touchUpInside)
         return bt
     }()
 
@@ -95,33 +93,32 @@ class TweetCell: UICollectionViewCell {
     
     // MARK: - Selectors
     @objc private func handleCommentTapped() {
-        
+        print("DEBUG: Button comment is tapped..")
     }
-    
     
     @objc private func handleRetweetTapped() {
-        
+        print("DEBUG: Button retweet is tapped..")
     }
-    
     
     @objc private func handleLikeTapped() {
-        
+        print("DEBUG: Button like is tapped..")
     }
     
-    
-    @objc private func handleShareTapped() {
-        
+    @objc private func handleSharedTapped() {
+        print("DEBUG: Button shared is tapped..")
     }
     
     
     @objc private func handleProfileImageTapped() {
-        self.delegate?.handleProfileImageTapped(self)
+        guard let user = self.tweet?.user else { return }
+        self.delegate?.handleProfileImageTapped(user)
     }
     
     
     // MARK: - Helpers
-    private func configure() {
-        guard let tweet = self.tweet else { return }
+    func configure(tweet: Tweet, delegate: TWeetCellDelegate) {
+        self.tweet = tweet
+        self.delegate = delegate
         
         let viewModel = TweetViewModel(tweet: tweet)
         
