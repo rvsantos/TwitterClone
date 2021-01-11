@@ -37,7 +37,8 @@ class CustomTextView: UITextView {
         backgroundColor = .white
         font = .systemFont(ofSize: 16)
         isScrollEnabled = false
-        heightAnchor.constraint(equalToConstant: 300).isActive = true
+        heightAnchor.constraint(equalToConstant: 100).isActive = true
+        autocorrectionType = .no
         
         addSubview(self.placeholderLabel)
         self.placeholderLabel.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 8, paddingLeft: 4)
