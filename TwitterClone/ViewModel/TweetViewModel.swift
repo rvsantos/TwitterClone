@@ -30,6 +30,10 @@ struct TweetViewModel {
         formatter.dateFormat = "h:mm a ∙ dd/MM/yyyy"
         return formatter.string(from: self.tweet.timestamp)
     }
+    
+    var username: String {
+        return self.user.username
+    }
 
     var timestamp: String? {
         let formatter = DateComponentsFormatter()
@@ -77,5 +81,16 @@ struct TweetViewModel {
                                                                                   .foregroundColor: UIColor.lightGray]))
         
         return attributedTitle
+    }
+    
+    func size(forWidth width: CGFloat) -> CGSize {
+        let measurementLabel = UILabel()
+        measurementLabel.text = self.tweet.caption
+        measurementLabel.numberOfLines = 0
+        measurementLabel.lineBreakMode = .byWordWrapping
+        measurementLabel.translatesAutoresizingMaskIntoConstraints = false
+        measurementLabel.widthAnchor.constraint(equalToConstant: width).isActive = true
+        
+        return measurementLabel.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
     }
 }

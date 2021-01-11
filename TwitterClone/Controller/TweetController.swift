@@ -78,7 +78,11 @@ extension TweetController {
 extension TweetController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: self.view.frame.width, height: 250)
+        
+        let viewModel = TweetViewModel(tweet: self.tweet)
+        let height = viewModel.size(forWidth: self.view.frame.width).height
+        
+        return CGSize(width: self.view.frame.width, height: height + 260)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

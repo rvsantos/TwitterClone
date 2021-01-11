@@ -32,7 +32,6 @@ class TweetHeader: UICollectionReusableView {
     private let fullnameLabel: UILabel = {
         let lb = UILabel()
         lb.font = .boldSystemFont(ofSize: 20)
-        lb.text = "Zazzie Beetz"
         return lb
     }()
     
@@ -40,7 +39,6 @@ class TweetHeader: UICollectionReusableView {
         let lb = UILabel()
         lb.font = .systemFont(ofSize: 14)
         lb.textColor = .lightGray
-        lb.text = "@zazzie"
         return lb
     }()
     
@@ -48,7 +46,6 @@ class TweetHeader: UICollectionReusableView {
         let lb = UILabel()
         lb.font = .systemFont(ofSize: 20)
         lb.numberOfLines = 0
-        lb.text = "Algum tweet hardcode que vai ser trocado depois."
         return lb
     }()
     
@@ -57,7 +54,6 @@ class TweetHeader: UICollectionReusableView {
         lb.font = .systemFont(ofSize: 14)
         lb.textColor = .lightGray
         lb.textAlignment = .left
-        lb.text = "14:59 PM - 20/01/2021"
         return lb
     }()
     
@@ -146,7 +142,7 @@ class TweetHeader: UICollectionReusableView {
         
         self.addSubview(self.captionLabel)
         self.captionLabel.anchor(top: stack.bottomAnchor, left: leftAnchor, right: rightAnchor,
-                                 paddingTop: 20, paddingLeft: 16, paddingRight: 16)
+                                 paddingTop: 12, paddingLeft: 16, paddingRight: 16)
         
         self.addSubview(self.dateLabel)
         self.dateLabel.anchor(top: self.captionLabel.bottomAnchor, left: leftAnchor,
@@ -158,7 +154,7 @@ class TweetHeader: UICollectionReusableView {
         
         self.addSubview(self.statsView)
         self.statsView.anchor(top: self.dateLabel.bottomAnchor, left: leftAnchor, right: rightAnchor,
-                              paddingTop: 20, height: 40)
+                              paddingTop: 12, height: 40)
         
         let actionStack = UIStackView(arrangedSubviews: [self.commentButton, self.retweetButton,
                                                          self.likeButton, self.sharedButton])
@@ -203,7 +199,7 @@ class TweetHeader: UICollectionReusableView {
         
         self.captionLabel.text = viewModel.captionLabel
         self.fullnameLabel.text = viewModel.fullname
-        self.usernameLabel.attributedText = viewModel.userInfoText
+        self.usernameLabel.text = "@\(viewModel.username)"
         self.profileImageView.sd_setImage(with: viewModel.profileImageUrl)
         self.dateLabel.text = viewModel.headerTimestamp
         self.likesLabel.attributedText = viewModel.likesAttributedString
