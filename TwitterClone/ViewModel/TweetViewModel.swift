@@ -20,6 +20,16 @@ struct TweetViewModel {
     var captionLabel: String {
         return self.tweet.caption
     }
+    
+    var fullname: String {
+        return self.user.fullname
+    }
+    
+    var headerTimestamp: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a ∙ dd/MM/yyyy"
+        return formatter.string(from: self.tweet.timestamp)
+    }
 
     var timestamp: String? {
         let formatter = DateComponentsFormatter()
@@ -29,6 +39,14 @@ struct TweetViewModel {
         let now = Date()
         
         return formatter.string(from: self.tweet.timestamp, to: now)
+    }
+    
+    var retweetsAttributedString: NSAttributedString {
+        return self.attributedText(withValue: self.tweet.retweetCount, text: "Retweets")
+    }
+    
+    var likesAttributedString: NSAttributedString {
+        return self.attributedText(withValue: self.tweet.likes, text: "Likes")
     }
     
     var userInfoText: NSAttributedString {
@@ -47,5 +65,17 @@ struct TweetViewModel {
     init(tweet: Tweet) {
         self.tweet = tweet
         self.user = tweet.user
+    }
+    
+    
+    // MARK: - Private
+    fileprivate func attributedText(withValue value: Int, text: String) -> NSAttributedString {
+        
+        let attributedTitle = NSMutableAttributedString(string: "\(value)", attributes: [.font: UIFont.systemFont(ofSize: 14)])
+        
+        attributedTitle.append(NSAttributedString(string: " \(text)", attributes: [.font: UIFont.systemFont(ofSize: 14, weight: .bold),
+                                                                                  .foregroundColor: UIColor.lightGray]))
+        
+        return attributedTitle
     }
 }
